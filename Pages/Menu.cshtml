@@ -1,33 +1,38 @@
 ﻿@page
-@model MenuModel
+@model MightyBurger.Pages.MenuModel
 @{
     ViewData["Title"] = "Menu";
 }
 
-<h1>Our Menu</h1>
+<h2>Our Menu</h2>
 
-<div class="menu-item">
-    <h3>Mighty Burger</h3>
-    <p>A juicy beef patty with lettuce, tomato, cheese, and our special sauce.</p>
-    <p class="price">$10</p>
-</div>
+<!-- Search Form -->
+<form method="get">
+    <input type="text" name="SearchQuery" value="@Model.SearchQuery" placeholder="Search menu..." />
+    <button type="submit">Search</button>
+</form>
 
-<div class="menu-item">
-    <h3>Cheese Burger</h3>
-    <p>A classic cheeseburger with melted cheddar and all the fixings.</p>
-    <p class="price">$8</p>
-</div>
-
-<div class="menu-item">
-    <h3>Veggie Burger</h3>
-    <p>A delicious plant-based patty with fresh veggies and vegan mayo.</p>
-    <p class="price">$7</p>
-</div>
-<div class="menu-container">
-    <div class="menu-item">
-        <h3>Mighty Burger</h3>
-        <p>A juicy beef patty with lettuce, tomato, cheese, and our special sauce.</p>
-        <p class="price">$10</p>
-    </div>
-    <!-- Repeat for other items -->
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MenuItems)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>£@item.Price.ToString("F2")</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="@item.Name" width="100">
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -9,6 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 80px; /* Ensures content is not hidden under fixed header */
 }
 
 .container {
@@ -179,6 +180,21 @@ footer {
     .footer-links a:hover, .footer-social a:hover {
         color: #FFD700;
     }
+
+/* Fix for login form being blocked by fixed header */
+.container {
+    margin-top: 120px !important; /* Pushes content down */
+}
+
+/* Ensure login form is centered properly */
+.login-container {
+    max-width: 400px;
+    margin: 120px auto; /* Pushes login form lower */
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 
 /* Animations */
 @keyframes fadeInUp {

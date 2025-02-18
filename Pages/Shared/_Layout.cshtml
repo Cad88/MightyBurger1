@@ -2,48 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mighty Burger</title>
+    <title>@ViewData["Title"] - Mighty Burger</title>
     <link rel="stylesheet" href="~/css/site.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="navbar-brand">Mighty Burger</div>
-            <button class="navbar-toggle" aria-label="Toggle navigation">
-                <span class="navbar-toggle-icon"></span>
-            </button>
-            <div class="navbar-links">
-                <a asp-page="/Index">Home</a>
-                <a asp-page="/Menu">Menu</a>
-                <a asp-page="/About">About</a>
-                <a asp-page="/Contact">Contact</a>
-            </div>
+        <nav>
+            <ul>
+                <li><a asp-page="/Index">Home</a></li>
+                <li><a asp-page="/Menu">Menu</a></li>
+                <li><a asp-page="/Contact">Contact</a></li>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-area="Identity" asp-page="/Account/Manage">Hello, @User.Identity.Name!</a></li>
+                    <li><a asp-area="Identity" asp-page="/Account/Logout">Logout</a></li>
+                }
+                else
+                {
+                    <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                    <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                }
+            </ul>
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main">
+        @RenderBody() <!-- This is where each page’s content goes -->
+    </main>
 
-   
+    <footer>
+        <p>&copy; 2025 Mighty Burger</p>
+        <a href="https://validator.w3.org/#validate_by_uri">Validate HTML</a>
+        <a href="https://jigsaw.w3.org/css-validator/">Validate CSS</a>
+    </footer>
 
-    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false) <!-- This fixes the login page error -->
 </body>
 </html>
-<script src="~/js/site.js"></script>
-
-
-<footer>
-    <div class="footer-content">
-        <p>&copy; 2023 - Mighty Burger</p>
-        <div class="social-icons">
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-    </div>
-</footer>
